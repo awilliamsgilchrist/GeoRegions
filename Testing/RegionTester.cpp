@@ -465,11 +465,11 @@ void RegionTester::testSubRegions()
     std::string testResult;
 
     std::cout << "Test case for findID(): ";
-    testResult = (testRegion->findID(4) == testNation) ? SUCCESS : FAILURE;
+    testResult = (testRegion->findID(19) == testNation) ? SUCCESS : FAILURE;
     std::cout << testResult << std::endl;
 
     std::cout << "Test case for findParentByChildID(): ";
-    testResult = (testRegion->findParentByChildID(5) == testNation) ? SUCCESS : FAILURE;
+    testResult = (testRegion->findParentByChildID(20) == testNation) ? SUCCESS : FAILURE;
     std::cout << testResult << std::endl;
 
     std::cout << "Test case for getSubRegionCount(): ";
@@ -485,10 +485,6 @@ void RegionTester::testSubRegions()
     testResult = (testRegion->getSubRegionCount() == 3) ? SUCCESS : FAILURE;
     std::cout << testResult << std::endl;
 
-    delete testNation;
-    testNation = nullptr;
-    delete testRegion;
-    testRegion = nullptr;
     //ENDOF TODO
 }
 
@@ -499,25 +495,23 @@ void RegionTester::testComputeTotalPopulation()
 
     // TODO: Add test cases for computeTotalPopulation
     //Done
-    Region* testRegion = Region::create(Region::RegionType::WorldType, "TestWorld,80,800");
+    Region* testRegion = Region::create(Region::RegionType::WorldType, "TestWorld,0,800");
     std::cout << "Test case for one region: ";
-    testMessage = testRegion->computeTotalPopulation() == 80 ? "Success!" : "Returned incorrect value";
+    testMessage = testRegion->computeTotalPopulation() == 0 ? "Success!" : "Returned incorrect value";
     std::cout << testMessage << std::endl;
     Region* testSubRegion1 = Region::create(Region::RegionType::NationType, "TestNation1,30,50");
     Region* testSubRegion2 = Region::create(Region::RegionType::NationType, "TestNation2,50,50");
     testRegion->appendChild(testSubRegion1);
     testRegion->appendChild(testSubRegion2);
     std::cout << "Test case for one region with two children: ";
-    testMessage = testRegion->computeTotalPopulation() == 160 ? "Success!" : "Returned incorrect value";
+    testMessage = testRegion->computeTotalPopulation() == 80 ? "Success!" : "Returned incorrect value";
     std::cout << testMessage << std::endl;
     Region* grandSubRegion1 = Region::create(Region::RegionType::StateType, "TestState 1,20,60");
     Region* grandSubRegion2 = Region::create(Region::RegionType::StateType, "TestState 1,40,60");
     testSubRegion1->appendChild(grandSubRegion1);
     testSubRegion1->appendChild(grandSubRegion2);
     std::cout << "Test case for one region with two children and two grandchildren: ";
-    testMessage = testRegion->computeTotalPopulation() == 220 ? "Success!" : "Returned incorrect value";
+    testMessage = testRegion->computeTotalPopulation() == 140 ? "Success!" : "Returned incorrect value";
     std::cout << testMessage << std::endl;
-    delete testRegion;
-    testRegion = nullptr;
     //ENDOF TODO
 }
