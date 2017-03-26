@@ -164,6 +164,10 @@ void Region::removeSubRegion(Region* region)
         {
             newChildren.push_back(child);
         }
+        else
+        {
+            delete child;
+        }
     }
 
     m_children = newChildren;
